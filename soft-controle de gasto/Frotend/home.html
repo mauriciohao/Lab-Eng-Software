@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Grupos - PengoPay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">PengoPay</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="criar-grupo.html">Criar Grupo</a>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link" id="clearDataButton" style="color: #fff;">Limpar Dados</button>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+                <div id="success-message" class="alert alert-success" style="display: none;"></div>
+
+                <!-- Entrar em Grupo -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4 class="mb-0">Entrar em um Grupo</h4>
+                    </div>
+                    <div class="card-body">
+                        <form id="form-entrar-grupo">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="codigoConvite" placeholder="Digite o código de convite" required>
+                                <button class="btn btn-primary" type="submit">Entrar no Grupo</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Meus Grupos -->
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Meus Grupos</h4>
+                        <a href="criar-grupo.html" class="btn btn-primary">Criar Novo Grupo</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="groupsList"></div>
+                        <div id="noGroups" class="text-center py-5" style="display: none;">
+                            <h5 class="text-muted">Você ainda não participa de nenhum grupo</h5>
+                            <p class="text-muted">Crie um novo grupo ou entre em um existente usando um código de convite</p>
+                            <a href="criar-grupo.html" class="btn btn-primary mt-3">Criar Grupo</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+    <script>
+        document.getElementById('clearDataButton').addEventListener('click', () => {
+            localStorage.clear();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
