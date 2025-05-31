@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - PengoPay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="text-center mb-4">
+                    <h1 class="display-4">PengoPay</h1>
+                    <p class="lead">Crie sua conta e comece a gerenciar suas despesas</p>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Cadastro</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+                        <div id="success-message" class="alert alert-success" style="display: none;"></div>
+                        <form id="register-form">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome Completo</label>
+                                <input type="text" class="form-control" id="nome" required minlength="3">
+                                <div class="form-text">Digite seu nome completo</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$">
+                                <div class="form-text">Digite um email válido</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Usuário</label>
+                                <input type="text" class="form-control" id="username" required minlength="3" maxlength="20">
+                                <div class="form-text">Mínimo 3 caracteres, máximo 20</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" required minlength="6">
+                                <div class="form-text">Mínimo 6 caracteres</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmarSenha" class="form-label">Confirmar Senha</label>
+                                <input type="password" class="form-control" id="confirmarSenha" required>
+                                <div class="form-text">Digite a mesma senha</div>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary">Cadastrar</button>
+                                <a href="index.html" class="btn btn-secondary">Voltar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
+
