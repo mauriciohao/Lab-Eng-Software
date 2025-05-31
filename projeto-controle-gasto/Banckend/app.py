@@ -56,3 +56,10 @@ if __name__ == '__main__':
     if modo == "development":
         init_db()
     app.run(debug=True)
+
+@app.route("/")
+def homepage():
+    return jsonify({
+        "message": "✅ API do Controle de Gastos está ativa!",
+        "status": "ok"
+    })
