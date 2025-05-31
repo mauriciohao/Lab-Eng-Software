@@ -1,6 +1,6 @@
 // scripts/config.js
 
-export const API_BASE = 'http://localhost:5000/api';
+export const API_BASE = 'https://lab-eng-software-controle-gasto.onrender.com/api';
 
 // Mensagens globais
 export const mensagens = {
