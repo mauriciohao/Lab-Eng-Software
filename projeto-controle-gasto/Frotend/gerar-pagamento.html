@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerar PIX - PengoPay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">PengoPay</a>
+            <div class="collapse navbar-collapse justify-content-end">
+                <ul class="navbar-nav ms-auto flex-row">
+                    <li class="nav-item me-3">
+                        <a class="nav-link" href="javascript:history.back()">Voltar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Sair</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h4>Gerar PIX</h4>
+                    </div>
+                    <div class="card-body">
+                        <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+                        <div id="success-message" class="alert alert-success" style="display: none;"></div>
+                        <div id="expenseDetails" class="mb-4"></div>
+
+                        <div class="mb-4">
+                            <h5>Informações do PIX</h5>
+                            <div class="alert alert-info">
+                                <p class="mb-2"><strong>Chave PIX:</strong> <span id="pixKey">123.456.789-00</span></p>
+                                <p class="mb-2"><strong>Banco:</strong> <span id="bankName">Banco XYZ</span></p>
+                                <p class="mb-0"><strong>Beneficiário:</strong> <span id="beneficiary">Nome do Beneficiário</span></p>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <h5>QR Code PIX</h5>
+                            <div class="text-center">
+                                <img id="pixQRCode" src="https://via.placeholder.com/200" alt="QR Code PIX" class="img-fluid mb-2">
+                                <p class="text-muted">Escaneie o QR Code para pagar via PIX</p>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" id="copyPixKeyBtn">Copiar Chave PIX</button>
+                            <a class="btn btn-secondary" href="grupo-detalhes.html">Voltar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
+
