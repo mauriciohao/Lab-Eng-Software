@@ -53,8 +53,8 @@ def init_db():
 if __name__ == '__main__':
     modo = os.environ.get("FLASK_ENV", "development")
     logger.info(f"🚀 Iniciando aplicação em modo {modo.upper()}")
-    if modo == "development":
-        init_db()
+
+    init_db()
     app.run(debug=True)
 
 @app.route("/")
