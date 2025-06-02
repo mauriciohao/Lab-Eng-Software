@@ -63,3 +63,12 @@ def homepage():
         "message": "✅ API do Controle de Gastos está ativa!",
         "status": "ok"
     })
+
+@app.route('/init')
+def initialize():
+    from models.usuario import Usuario
+    from models.grupo import Grupo
+    from models.despesa import Despesa
+    from models.divisao import Divisao
+    banco.create_all()
+    return '✅ Banco inicializado com sucesso!'
