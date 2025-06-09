@@ -81,21 +81,34 @@ DEBUG_SECRET = os.environ.get("DEBUG_SECRET", "admin123")  # 默认密码
 if DEBUG_MODE:
     @app.route("/debug/usuarios", methods=["GET"])
     def debug_usuarios():
-        token = request.args.get("token")
+        from flask import request
+        try:
+            token = request.args.get("token")
 
-        if token != DEBUG_SECRET:
+            if token != DEBUG_SECRET:
+                return jsonify({
+                    "success": False,
+                    "message": "Acesso não autorizado. Token inválido."
+                }), 403
+
+            usuarios = Usuario.query.all()
+
+            return jsonify([
+                {
+                    "id": u.id,
+                    "nome": u.nome,
+                    "email": u.email,
+                    "username": u.username,
+                    "senha_hash": u.senha
+                } for u in usuarios
+            ])
+        except Exception as e:
+            import traceback
+            print("🔥 Erro no /debug/usuarios:", e)
+            print(traceback.format_exc())
             return jsonify({
                 "success": False,
-                "message": "Acesso não autorizado. Token inválido."
-            }), 403
+                "message": f"Erro interno: {str(e)}"
+            }), 500
 
-        usuarios = Usuario.query.all()
-        return jsonify([
-            {
-                "id": u.id,
-                "nome": u.nome,
-                "email": u.email,
-                "username": u.username,
-                "senha_hash": u.senha
-            } for u in usuarios
-        ])
+        
