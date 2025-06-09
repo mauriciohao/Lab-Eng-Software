@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from models.usuario import Usuario
 from models import banco
 from utils.response import sucesso, erro
+from werkzeug.security import generate_password_hash, check_password_hash
 import logging
 import traceback
 
@@ -37,7 +38,8 @@ def register():
         return erro('Este nome de usuário já está em uso.', 400)
 
     try:
-        novo_usuario = Usuario(nome=nome, email=email, username=username, senha=senha)
+        senha_hash = generate_password_hash(senha)
+        novo_usuario = Usuario(nome=nome, email=email, username=username, senha=senha_hash)
         banco.session.add(novo_usuario)
         banco.session.commit()
         return sucesso(message='Cadastro realizado com sucesso!')
@@ -46,6 +48,7 @@ def register():
         logger.error(traceback.format_exc())
         banco.session.rollback()
         return erro('Erro ao realizar cadastro. Tente novamente.', 500)
+
 
 @auth.route('/login', methods=['POST', 'OPTIONS'])
 def login():
@@ -63,11 +66,9 @@ def login():
         return erro('Dados incompletos', 400)
 
     try:
-        user = Usuario.query.filter_by(email=login_id, senha=senha).first()
-        if not user:
-            user = Usuario.query.filter_by(username=login_id, senha=senha).first()
+        user = Usuario.query.filter((Usuario.email == login_id) | (Usuario.username == login_id)).first()
 
-        if not user:
+        if not user or not check_password_hash(user.senha, senha):
             return erro('Email/usuário ou senha inválidos!', 401)
 
         return sucesso({
