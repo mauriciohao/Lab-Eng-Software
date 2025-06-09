@@ -88,6 +88,21 @@ export function inicializarCriacaoGrupo() {
     const descricao = document.getElementById('descricao').value.trim();
     const regras = document.getElementById('regras').value.trim();
 
+    if (!nome || !regras) {
+      mostrarMensagem('error', 'Nome e regras são obrigatórios.');
+      return;
+    }
+
+    if (nome.length < 3) {
+      mostrarMensagem('error', 'O nome do grupo deve ter pelo menos 3 caracteres.');
+      return;
+    }
+
+    if (regras.length < 10) {
+      mostrarMensagem('error', 'As regras do grupo devem conter mais detalhes.');
+      return;
+    }
+
     const emails = Array.from(document.querySelectorAll('#listaMembros .email-item')).map(el => el.textContent.trim());
 
     try {
@@ -147,4 +162,3 @@ export function inicializarGrupoDetalhes() {
     })
     .catch(() => mostrarMensagem('error', mensagens.erroPadrao));
 }
-
