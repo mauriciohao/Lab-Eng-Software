@@ -3,6 +3,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from models import banco
+from models.usuario import Usuario
 from controllers.controlador_grupo import controlador_grupo
 from controllers.controlador_despesa import controlador_despesa
 from controllers.auth import auth
@@ -72,3 +73,29 @@ def initialize():
     from models.divisao import Divisao
     banco.create_all()
     return '✅ Banco inicializado com sucesso!'
+
+
+DEBUG_MODE = os.environ.get("DEBUG_MODE", "false").lower() == "true"
+DEBUG_SECRET = os.environ.get("DEBUG_SECRET", "admin123")  # 默认密码
+
+if DEBUG_MODE:
+    @app.route("/debug/usuarios", methods=["GET"])
+    def debug_usuarios():
+        token = request.args.get("token")
+
+        if token != DEBUG_SECRET:
+            return jsonify({
+                "success": False,
+                "message": "Acesso não autorizado. Token inválido."
+            }), 403
+
+        usuarios = Usuario.query.all()
+        return jsonify([
+            {
+                "id": u.id,
+                "nome": u.nome,
+                "email": u.email,
+                "username": u.username,
+                "senha_hash": u.senha
+            } for u in usuarios
+        ])
